@@ -1,0 +1,18 @@
+adb -e shell
+	Grabs only instance of android hooked up to adb and instantiates a shell
+
+su
+	Gives root on android device. May only work with emulators. Not sure about physical
+
+find . -name "*.db"
+	Finds all files with a .db extension (ie all databases)
+
+sqlite3 'nameofdatabase.db'
+	Open sqlite3 with context of specified database
+
+.tables
+	Shows tables in sqlite3
+
+.schema
+	Shows columns and types for every table
+
