@@ -1,0 +1,113 @@
+<apex:page controller="ExampleObjectController">
+	<head>
+		<style>
+			#largeText{
+				font-size: 18px;
+			}
+
+			.customPopup{
+				background-color: white;
+				border-style: solid;
+				border-width: 2px;
+				left: 50%;
+				padding:10px;
+				position: absolute;
+				z-index: 9999;
+				/* These are the 3 css properties you will need to tweak so the pop 
+				up displays in the center of the screen. First set the width. Then set 
+				margin-left to negative half of what the width is. You can also add 
+				the height property for a fixed size pop up.*/
+				width: 500px;
+				margin-left: -250px;
+				top:100px;
+			}
+		</style>
+	</head>
+	<div id="largeText">
+		NEW REQUEST FORM
+	</div>
+	<p/>
+	&nbsp;
+	<p/>
+	&nbsp;
+	<p/>
+	&nbsp;
+	<p/>
+	&nbsp;
+	<p/>
+	&nbsp;
+	<p/>
+	&nbsp;
+	<apex:form id="form">
+		<apex:outputPanel id="main">
+			<table>
+				<tr>
+					<td>
+						<div id="largeText">
+							Example Object Name
+						</div>
+					</td>
+					<td><apex:inputField value="{!newExampleObject.Name}"/></td>
+				</tr>
+				<tr>
+					<td>
+						<div id="largeText">
+							Account
+						</div>
+					</td>
+					<td>
+						<apex:inputField value="{!newExampleObject.Account__c}"/>
+					</td>
+					<td>
+						<apex:commandButton action="{!showPopup}" value="+" rerender="popup, main"/>
+					</td>
+				</tr>
+			</table>
+			<p/>
+			&nbsp;
+			<p/>
+			&nbsp;
+			<p/>
+			&nbsp;
+			<p/>
+			&nbsp;
+			<p/>
+			&nbsp;
+			<p/>
+			&nbsp;
+			<apex:commandButton action="{!save}" value="Save"/>
+		</apex:outputPanel>
+	</apex:form>
+	<!-- THE POPUP -->
+	<apex:outputPanel id="popup">
+		<apex:outputPanel styleClass="customPopup" layout="block" rendered="{!displayPopUp}">
+			<apex:form>
+				<h1>Create new account</h1>
+				<table>
+					<tr>
+						<td>Account Name</td>
+						<td><apex:inputField value="{!newAccount.Name}"/></td>
+					</tr>
+					<tr>
+						<td>Type</td>
+						<td><input type="text"/></td>
+					</tr>
+					<tr>
+						<td>Parent Account</td>
+						<td><input type="text"/></td>
+					</tr>
+					<tr>
+						<td>Phone</td>
+						<td><input type="text"/></td>
+					</tr>
+					<tr>
+						<td>Classification</td>
+						<td><input type="text"/></td>
+					</tr>
+				</table>
+				<apex:commandButton value="Create" rerender="popup, main" action="{!createNewAccount}"/>
+				<apex:commandButton value="Cancel" rerender="popup, main" action="{!closePopup}" immediate="true"/>
+			</apex:form>
+		</apex:outputPanel>
+	</apex:outputPanel>
+</apex:page>
